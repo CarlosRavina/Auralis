@@ -221,11 +221,12 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
       <div className="flex justify-between items-center max-w-4xl mx-auto">
         
         {/* Left Side: Info & AI */}
-        <div className="flex items-center gap-3 w-1/4 truncate">
+        {/* Changed width to auto on mobile and added max-width to title to prevent overflow */}
+        <div className="flex items-center gap-3 w-auto sm:w-1/4 shrink-1 overflow-hidden">
           <div className="h-10 w-10 rounded bg-slate-800 flex items-center justify-center hidden sm:flex shrink-0">
              <BookOpen size={20} className="text-slate-500" />
           </div>
-          <div className="flex flex-col truncate">
+          <div className="flex flex-col overflow-hidden max-w-[120px] sm:max-w-none">
             <span className="text-sm font-medium text-white truncate">{currentBook.title}</span>
             <span className="text-xs text-slate-400 truncate">{currentBook.author}</span>
           </div>
@@ -239,7 +240,7 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
         </div>
 
         {/* Center: Playback Controls OR Error Message */}
-        <div className="flex items-center gap-4 sm:gap-6 justify-center flex-1">
+        <div className="flex items-center gap-4 sm:gap-6 justify-center flex-1 shrink-0">
           {error ? (
             <div className="flex items-center gap-2 text-red-400 bg-red-900/20 px-4 py-2 rounded-full">
                 <AlertCircle size={20} />
@@ -266,7 +267,8 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
         </div>
 
         {/* Right: Tools */}
-        <div className="flex items-center gap-2 sm:gap-4 w-1/4 justify-end">
+        {/* Changed width to auto on mobile and justify-end */}
+        <div className="flex items-center gap-2 sm:gap-4 w-auto sm:w-1/4 justify-end">
 
             {/* Volume Control */}
             <div className="flex items-center gap-2 mr-2 group">
@@ -297,7 +299,8 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
                     className={`flex items-center gap-1 text-slate-300 hover:text-white text-xs font-bold ${error ? 'opacity-50 pointer-events-none' : ''}`}
                 >
                     <Gauge size={16} />
-                    <span>{speed}x</span>
+                    {/* Hide text on mobile */}
+                    <span className="hidden sm:inline">{speed}x</span>
                 </button>
                 {showSpeedMenu && (
                     <div className="absolute bottom-full right-0 mb-2 bg-slate-800 rounded-lg shadow-xl border border-slate-700 p-1 flex flex-col gap-1 min-w-[80px]">
@@ -322,7 +325,8 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
                     className={`flex items-center gap-1 hover:text-white text-xs font-bold ${sleepTimer ? 'text-blue-400' : 'text-slate-300'} ${error ? 'opacity-50 pointer-events-none' : ''}`}
                 >
                     <Clock size={16} />
-                    {sleepTimer && <span>{Math.ceil(sleepTimer)}m</span>}
+                    {/* Hide text on mobile */}
+                    {sleepTimer && <span className="hidden sm:inline">{Math.ceil(sleepTimer)}m</span>}
                 </button>
                 {showSleepMenu && (
                     <div className="absolute bottom-full right-0 mb-2 bg-slate-800 rounded-lg shadow-xl border border-slate-700 p-1 flex flex-col gap-1 min-w-[120px]">
